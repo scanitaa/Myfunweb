@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scarlett (Scanita) — Strategy, Investing & Brand</title>
+<style>
+  :root{
+    --bg:#fafafa;
+    --ink:#16181d;
+    --muted:#6b7079;
+    --line:#e6e6e6;
+    --accent:#ff5a36;
+    --card:#ffffff;
+    --radius:16px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:0 22px}
+  header{padding:34px 0 0}
+  nav{display:flex;justify-content:space-between;align-items:center;font-size:14px}
+  nav .name{font-weight:700;letter-spacing:.2px}
+  nav a{color:var(--muted);text-decoration:none;margin-left:18px}
+  nav a:hover{color:var(--ink)}
+  .navlinks{display:flex;align-items:center;flex-wrap:wrap}
+
+  .hero{display:flex;gap:34px;align-items:center;padding:58px 0 46px;flex-wrap:wrap}
+  .hero-img{flex:0 0 200px}
+  .hero-img img{
+    width:200px;height:200px;object-fit:cover;border-radius:50%;
+    border:1px solid var(--line);box-shadow:0 10px 30px rgba(0,0,0,.08);
+  }
+  .hero-text{flex:1;min-width:260px}
+  .eyebrow{color:var(--accent);font-weight:700;font-size:13px;letter-spacing:1.5px;text-transform:uppercase}
+  h1{font-size:clamp(30px,6vw,46px);line-height:1.08;margin:10px 0 14px;font-weight:800}
+  .lead{font-size:18px;color:#33363d;max-width:560px}
+  .tags{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap}
+  .tag{font-size:13px;border:1px solid var(--line);background:#fff;padding:6px 12px;border-radius:999px;color:var(--muted)}
+
+  section{padding:30px 0;border-top:1px solid var(--line)}
+  h2{font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+  .about p{font-size:17px;color:#2b2e34;max-width:620px;margin-bottom:14px}
+
+  /* game */
+  .game{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:26px;box-shadow:0 8px 26px rgba(0,0,0,.05)}
+  .game-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:8px}
+  .game-top h3{font-size:20px;font-weight:800}
+  .stats{display:flex;gap:18px;font-size:14px;color:var(--muted)}
+  .stats b{color:var(--ink)}
+  .hint{font-size:14px;color:var(--muted);margin:6px 0 18px}
+  .scramble{
+    font-size:clamp(26px,7vw,40px);font-weight:800;letter-spacing:8px;
+    text-align:center;padding:18px 8px;background:#f4f5f7;border-radius:12px;
+    text-transform:uppercase;user-select:none;
+  }
+  .controls{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+  #guess{
+    flex:1;min-width:160px;font-size:18px;padding:13px 14px;border:1px solid var(--line);
+    border-radius:10px;outline:none;text-transform:uppercase;
+  }
+  #guess:focus{border-color:var(--accent)}
+  button{
+    font-size:15px;font-weight:700;padding:13px 18px;border:none;border-radius:10px;
+    cursor:pointer;background:var(--ink);color:#fff;transition:transform .05s,opacity .2s;
+  }
+  button:hover{opacity:.88}
+  button:active{transform:translateY(1px)}
+  button.ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
+  .msg{margin-top:14px;font-size:15px;font-weight:600;min-height:22px}
+  .msg.good{color:#127a3e}
+  .msg.bad{color:var(--accent)}
+  .msg.win{color:var(--accent);font-size:17px}
+
+  footer{padding:40px 0 60px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+  footer a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line)}
+  footer .social{margin-bottom:10px}
+  footer .social a{margin-right:16px}
+
+  @media(max-width:560px){
+    .hero{padding:36px 0 30px;gap:22px}
+    .hero-img{flex:0 0 auto;margin:0 auto}
+    .hero-text{text-align:center}
+    .tags{justify-content:center}
+    .stats{gap:14px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <nav>
+      <span class="name">Scarlett · Scanita</span>
+      <span class="navlinks">
+        <a href="#about">About</a>
+        <a href="#play">Play</a>
+        <a href="#connect">Connect</a>
+      </span>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <div class="hero-img">
+      <img src="Scanita photo.jpg" alt="Scarlett (Scanita)">
+    </div>
+    <div class="hero-text">
+      <div class="eyebrow">Investment · Strategy · Brand</div>
+      <h1>I help sharp people think clearer and position stronger.</h1>
+      <p class="lead">Investment consultant by trade, strategist by wiring. I turn messy ideas into clear positioning and content that actually connects.</p>
+      <div class="tags">
+        <span class="tag">Investing</span>
+        <span class="tag">Positioning</span>
+        <span class="tag">Persuasion</span>
+        <span class="tag">Audience psychology</span>
+      </div>
+    </div>
+  </div>
+
+  <section id="about" class="about">
+    <h2>About</h2>
+    <p>I sit where money meets meaning. Day to day I advise on investments, but the real game I play is leverage: spotting the angle other people miss, then making it simple enough that anyone gets it.</p>
+    <p>My philosophy is my brand. I care about truth over comfort, originality over noise, and clarity over sounding clever. If something is weak, I would rather you hear it from me first.</p>
+    <p>Outside the spreadsheets I build content that treats the audience like adults: educational, honest, a little cheeky, and human. That is the whole point.</p>
+  </section>
+
+  <section id="play">
+    <h2>Word Scramble</h2>
+    <div class="game">
+      <div class="game-top">
+        <h3>Unscramble the Strategy Word</h3>
+        <div class="stats">
+          <span>Score <b id="score">0</b></span>
+          <span>Time <b id="time">60</b>s</span>
+        </div>
+      </div>
+      <p class="hint" id="hint">Hint: press Start to begin.</p>
+      <div class="scramble" id="scramble">READY?</div>
+      <div class="controls">
+        <input id="guess" type="text" placeholder="Type your answer" autocomplete="off" disabled>
+        <button id="submitBtn" disabled>Submit</button>
+        <button class="ghost" id="skipBtn" disabled>Skip</button>
+        <button class="ghost" id="startBtn">Start</button>
+      </div>
+      <div class="msg" id="msg"></div>
+    </div>
+  </section>
+
+  <section id="connect">
+    <h2>Connect</h2>
+    <p class="lead" style="font-size:16px;">Best place to find me is on socials. Come argue with me.</p>
+  </section>
+
+  <footer>
+    <div class="social">
+      <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <div>© <span id="year"></span> Scarlett (Scanita). Built clean, kept simple.</div>
+    <div style="margin-top:6px;font-size:12.5px;">Edit the social links in the footer to point to your real profiles.</div>
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  var WORDS = [
+    {w:"LEVERAGE",   h:"Small input, outsized result."},
+    {w:"COMPOUND",   h:"How small gains snowball over time."},
+    {w:"POSITION",   h:"Where you stand in the market's mind."},
+    {w:"NARRATIVE",  h:"The story that moves the money."},
+    {w:"RISK",       h:"What you manage, not avoid."},
+    {w:"AUDIENCE",   h:"The people you actually serve."},
+    {w:"STRATEGY",   h:"A plan with a real edge."},
+    {w:"PERSUASION", h:"Changing minds without forcing them."},
+    {w:"VALUE",      h:"What something is truly worth."},
+    {w:"TRUST",      h:"The asset that compounds slowest, breaks fastest."}
+  ];
+
+  // ---- pure helpers (testable) ----
+  function shuffle(str){
+    var a = str.split("");
+    for(var i=a.length-1;i>0;i--){
+      var j = Math.floor(Math.random()*(i+1));
+      var t=a[i]; a[i]=a[j]; a[j]=t;
+    }
+    return a.join("");
+  }
+  function scramble(word){
+    if(word.length<2) return word;
+    var s = shuffle(word);
+    var guard = 0;
+    while(s===word && guard++<20){ s = shuffle(word); }
+    return s;
+  }
+  function isCorrect(guess, answer){
+    return String(guess).trim().toUpperCase() === String(answer).trim().toUpperCase();
+  }
+  // expose for tests
+  if(typeof module!=="undefined" && module.exports){
+    module.exports = {shuffle:shuffle, scramble:scramble, isCorrect:isCorrect, WORDS:WORDS};
+  }
+
+  // ---- DOM wiring ----
+  var elScr=document.getElementById('scramble'),
+      elHint=document.getElementById('hint'),
+      elGuess=document.getElementById('guess'),
+      elScore=document.getElementById('score'),
+      elTime=document.getElementById('time'),
+      elMsg=document.getElementById('msg'),
+      bSubmit=document.getElementById('submitBtn'),
+      bSkip=document.getElementById('skipBtn'),
+      bStart=document.getElementById('startBtn');
+
+  if(!elScr) return; // not in browser (test env)
+
+  var order=[], idx=0, score=0, timeLeft=60, timer=null, playing=false, current=null;
+
+  function setMsg(text, cls){ elMsg.textContent=text; elMsg.className="msg "+(cls||""); }
+
+  function loadWord(){
+    if(idx>=order.length){ idx=0; order=shuffleArr(order); } // loop, reshuffled
+    current = order[idx];
+    elScr.textContent = scramble(current.w);
+    elHint.textContent = "Hint: "+current.h;
+    elGuess.value="";
+    elGuess.focus();
+  }
+  function shuffleArr(arr){
+    var a=arr.slice();
+    for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}
+    return a;
+  }
+
+  function tick(){
+    timeLeft--; elTime.textContent=timeLeft;
+    if(timeLeft<=0){ endGame(); }
+  }
+
+  function startGame(){
+    order = shuffleArr(WORDS);
+    idx=0; score=0; timeLeft=60; playing=true;
+    elScore.textContent=0; elTime.textContent=60;
+    elGuess.disabled=false; bSubmit.disabled=false; bSkip.disabled=false;
+    bStart.textContent="Restart";
+    setMsg("Go! Type the unscrambled word.","");
+    loadWord();
+    clearInterval(timer); timer=setInterval(tick,1000);
+  }
+
+  function endGame(){
+    clearInterval(timer); playing=false;
+    elGuess.disabled=true; bSubmit.disabled=true; bSkip.disabled=true;
+    elScr.textContent="DONE";
+    elHint.textContent="Hint: press Restart to play again.";
+    setMsg("Time! Final score: "+score+". Not bad. Beat it?","win");
+  }
+
+  function submitGuess(){
+    if(!playing) return;
+    if(isCorrect(elGuess.value, current.w)){
+      score++; elScore.textContent=score;
+      setMsg("Correct. Next one.","good");
+      idx++; loadWord();
+    } else {
+      setMsg("Not quite. Try again or skip.","bad");
+      elGuess.focus();
+    }
+  }
+
+  function skipWord(){
+    if(!playing) return;
+    setMsg("Skipped. The word was "+current.w+".","bad");
+    idx++; loadWord();
+  }
+
+  bStart.addEventListener('click', startGame);
+  bSubmit.addEventListener('click', submitGuess);
+  bSkip.addEventListener('click', skipWord);
+  elGuess.addEventListener('keydown', function(e){ if(e.key==="Enter") submitGuess(); });
+})();
+</script>
+</body>
+</html>
