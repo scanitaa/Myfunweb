@@ -123,6 +123,30 @@
 
   footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-size:14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 
+  /* game */
+  .game{background:var(--cream-2);border:1px solid var(--line);border-radius:24px;padding:40px;margin-top:30px;max-width:720px}
+  .game .top{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:10px;margin-bottom:8px}
+  .game .top .q{font-family:"Bricolage Grotesque";font-weight:700;font-size:15px;color:var(--muted)}
+  .game .top .score{font-weight:700;color:var(--ink)}
+  .game .bar{height:6px;background:var(--line);border-radius:999px;overflow:hidden;margin:14px 0 24px}
+  .game .bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--orange),var(--gold));transition:width .4s ease}
+  .statement{font-family:"Bricolage Grotesque";font-weight:700;font-size:clamp(22px,3.4vw,30px);line-height:1.25;min-height:2.2em}
+  .choices{display:flex;gap:14px;margin-top:26px;flex-wrap:wrap}
+  .choices button{flex:1;min-width:130px;font-family:"Hanken Grotesk";font-weight:700;font-size:17px;padding:16px;border-radius:14px;border:1.5px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;transition:transform .05s,background .15s,color .15s,opacity .15s}
+  .choices button:hover{background:var(--ink);color:var(--cream)}
+  .choices button:active{transform:translateY(1px)}
+  .choices button:disabled{cursor:default;opacity:.55}
+  .choices button.right{background:#1f7a44;border-color:#1f7a44;color:#fff;opacity:1}
+  .choices button.wrong{background:var(--orange);border-color:var(--orange);color:#fff;opacity:1}
+  .feedback{margin-top:20px;font-size:16.5px;color:var(--muted);min-height:3em;line-height:1.5}
+  .feedback b{color:var(--ink);font-family:"Bricolage Grotesque"}
+  .game .next{margin-top:18px;display:inline-block;background:var(--ink);color:var(--cream);border:none;border-radius:999px;padding:13px 24px;font-weight:600;font-size:15px;cursor:pointer}
+  .game .next:hover{opacity:.9}
+  .game .end{text-align:center;padding:14px 0}
+  .game .end h3{font-family:"Bricolage Grotesque";font-size:30px;margin-bottom:8px}
+  .game .end p{color:var(--muted);margin-bottom:20px}
+  @media(max-width:560px){.game{padding:28px 22px}}
+
   /* fade up on scroll */
   .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
   .reveal.in{opacity:1;transform:none}
@@ -139,6 +163,7 @@
         <a class="link" href="#talk">Talk</a>
         <a class="link" href="#why">Why me</a>
         <a class="link" href="#coaching">Coaching</a>
+        <a class="link" href="#play">Play</a>
         <a class="link" href="#contact">Contact</a>
         <a class="btn" href="#kit">Download kit</a>
       </div>
@@ -264,6 +289,38 @@
     </div>
   </section>
 
+  <!-- PLAY: Myth or Truth -->
+  <section id="play">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="label">Myth or truth</div>
+        <h2>Quick gut check on money and burnout.</h2>
+        <p class="sub">Eight statements. Tap myth or truth, see if your instincts match reality. No advice, just the stuff worth knowing before your first payday hits.</p>
+      </div>
+      <div class="game reveal" id="game">
+        <div class="top">
+          <span class="q" id="qcount">Question 1 of 8</span>
+          <span class="score">Score <b id="score">0</b></span>
+        </div>
+        <div class="bar"><span id="bar"></span></div>
+        <div id="play-area">
+          <div class="statement" id="statement"></div>
+          <div class="choices">
+            <button id="bMyth" type="button">Myth</button>
+            <button id="bTruth" type="button">Truth</button>
+          </div>
+          <div class="feedback" id="feedback"></div>
+          <button class="next" id="nextBtn" type="button" style="display:none">Next</button>
+        </div>
+        <div class="end" id="end" style="display:none">
+          <h3 id="endTitle"></h3>
+          <p id="endMsg"></p>
+          <button class="next" id="restartBtn" type="button">Play again</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- CONTACT -->
   <section id="contact" class="contact">
     <div class="wrap reveal">
@@ -298,6 +355,97 @@
     entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
   }, {threshold:0.12});
   document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+  // ---- Myth or Truth game ----
+  (function(){
+    var Q = [
+      {t:"You should just feel grateful to have a job, so pushing through burnout is normal.", a:false, e:"Burnout is a warning light, not a badge. Gratitude and protecting your limits are not opposites."},
+      {t:"Paying yourself first, saving a bit the moment you get paid, makes saving far easier.", a:true, e:"Saving before you spend beats relying on whatever is left over, which is usually nothing."},
+      {t:"Budgeting means you can never spend money on fun.", a:false, e:"A budget just tells your money where to go. Fun gets a line too, on purpose."},
+      {t:"Burnout is just being tired, and one good weekend fixes it.", a:false, e:"It runs deeper than tired. Real burnout rarely resets from a single lie-in."},
+      {t:"Small monthly subscriptions can quietly add up to a real leak in your budget.", a:true, e:"Five dollars here and there compounds. The little stuff is where the money hides."},
+      {t:"Checking your bank balance often makes you worse with money.", a:false, e:"Awareness is step one. Avoiding the number is the actual enemy, not facing it."},
+      {t:"Saying no at work will always get you fired.", a:false, e:"Boundaries set clearly and calmly tend to build respect, not pink slips."},
+      {t:"You need a big salary before budgeting is even worth doing.", a:false, e:"Myth. Habits matter more than income size. Small earners who budget often outpace big earners who do not."}
+    ];
+
+    var i=0, score=0, answered=false;
+    var elState=document.getElementById('statement'),
+        elQ=document.getElementById('qcount'),
+        elScore=document.getElementById('score'),
+        elBar=document.getElementById('bar'),
+        elFb=document.getElementById('feedback'),
+        bMyth=document.getElementById('bMyth'),
+        bTruth=document.getElementById('bTruth'),
+        bNext=document.getElementById('nextBtn'),
+        bRestart=document.getElementById('restartBtn'),
+        playArea=document.getElementById('play-area'),
+        endBox=document.getElementById('end'),
+        endTitle=document.getElementById('endTitle'),
+        endMsg=document.getElementById('endMsg');
+
+    if(!elState) return;
+
+    function load(){
+      answered=false;
+      var q=Q[i];
+      elState.textContent=q.t;
+      elQ.textContent="Question "+(i+1)+" of "+Q.length;
+      elBar.style.width=((i)/Q.length*100)+"%";
+      elFb.textContent="";
+      bNext.style.display="none";
+      [bMyth,bTruth].forEach(function(b){ b.disabled=false; b.className=""; });
+    }
+
+    function answer(choice){ // choice: false=myth, true=truth
+      if(answered) return;
+      answered=true;
+      var q=Q[i];
+      var correct = (choice===q.a);
+      if(correct) score++;
+      elScore.textContent=score;
+      bMyth.disabled=true; bTruth.disabled=true;
+      var picked = choice? bTruth : bMyth;
+      var rightBtn = q.a? bTruth : bMyth;
+      rightBtn.className="right";
+      if(!correct) picked.className="wrong";
+      elBar.style.width=((i+1)/Q.length*100)+"%";
+      elFb.innerHTML="<b>"+(correct?"Spot on.":"Not quite.")+"</b> "+q.e;
+      bNext.textContent = (i===Q.length-1)? "See result" : "Next";
+      bNext.style.display="inline-block";
+    }
+
+    function next(){
+      if(i<Q.length-1){ i++; load(); }
+      else { finish(); }
+    }
+
+    function finish(){
+      playArea.style.display="none";
+      endBox.style.display="block";
+      var msg;
+      if(score===Q.length) msg="Flawless. Your instincts are sorted.";
+      else if(score>=6) msg="Strong. You see through most of the noise.";
+      else if(score>=4) msg="Decent start. A few myths still got you.";
+      else msg="Plenty to unlearn, and that is the whole point.";
+      endTitle.textContent="You scored "+score+" / "+Q.length;
+      endMsg.textContent=msg;
+    }
+
+    function restart(){
+      i=0; score=0; answered=false;
+      elScore.textContent=0;
+      endBox.style.display="none";
+      playArea.style.display="block";
+      load();
+    }
+
+    bMyth.addEventListener('click', function(){ answer(false); });
+    bTruth.addEventListener('click', function(){ answer(true); });
+    bNext.addEventListener('click', next);
+    bRestart.addEventListener('click', restart);
+    load();
+  })();
 </script>
 </body>
 </html>
