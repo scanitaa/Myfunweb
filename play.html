@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Play | Scarlett</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@1,9..144,500;1,9..144,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="seam"></div>
+<header><div class="wrap"><nav>
+  <a class="brand" href="index.html"><span class="dot"></span>Scarlett</a>
+  <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navlinks">Menu</button>
+  <div class="navlinks" id="navlinks">
+    <a href="index.html">Home</a>
+    <a href="talks.html">Talks</a>
+    <a href="coaching.html">Coaching</a>
+    <a href="play.html" aria-current="page">Play</a>
+    <a href="contact.html">Contact</a>
+    <a class="btn" href="talks.html#kit">Speaker kit</a>
+  </div>
+</nav></div></header>
+<main>
+<section class="hero" style="padding-bottom:30px"><div class="wrap reveal">
+  <div class="eyebrow">Myth or truth</div>
+  <h1>Quick gut check on <span class="o">money</span> and <span class="g">burnout</span>.</h1>
+  <p>Eight statements. Tap myth or truth, see if your instincts match reality. No advice, just the stuff worth knowing before your first payday hits.</p>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap">
+  <div class="game reveal" id="game">
+    <div class="top"><span class="q" id="qcount">Question 1 of 8</span><span class="score">Score <b id="score">0</b></span></div>
+    <div class="bar"><span id="bar"></span></div>
+    <div id="play-area">
+      <div class="statement" id="statement"></div>
+      <div class="choices">
+        <button id="bMyth" type="button">Myth</button>
+        <button id="bTruth" type="button">Truth</button>
+      </div>
+      <div class="feedback" id="feedback"></div>
+      <button class="next" id="nextBtn" type="button" style="display:none">Next</button>
+    </div>
+    <div class="end" id="end" style="display:none">
+      <h3 id="endTitle"></h3><p id="endMsg"></p>
+      <button class="next" id="restartBtn" type="button">Play again</button>
+    </div>
+  </div>
+</div></section>
+
+<section id="listen"><div class="wrap reveal">
+  <div class="label gold">A minute to breathe</div>
+  <h2>When it all gets loud, press play.</h2>
+  <p class="sub">A calm little piano piece I had made, for the days the noise does not stop. Put it on while you sort your head, your inbox, or your budget. No words, just a bit of quiet.</p>
+  <audio controls preload="none" style="width:100%;max-width:520px;margin-top:24px">
+    <source src="clear-morning.mp3" type="audio/mpeg">
+    Your browser does not support the audio player.
+  </audio>
+</div></section>
+</main>
+<footer><div class="wrap">
+  <span>Singapore. I share what I have learned and do not give financial advice.</span>
+  <span>&copy; <span id="year"></span> Scarlett</span>
+</div></footer>
+<script src="main.js"></script>
+<script>
+(function(){
+  var Q=[
+    {t:"You should just feel grateful to have a job, so pushing through burnout is normal.",a:false,e:"Burnout is a warning light, not a badge. Gratitude and protecting your limits are not opposites."},
+    {t:"Paying yourself first, saving a bit the moment you get paid, makes saving far easier.",a:true,e:"Saving before you spend beats relying on whatever is left over, which is usually nothing."},
+    {t:"Budgeting means you can never spend money on fun.",a:false,e:"A budget just tells your money where to go. Fun gets a line too, on purpose."},
+    {t:"Burnout is just being tired, and one good weekend fixes it.",a:false,e:"It runs deeper than tired. Real burnout rarely resets from a single lie-in."},
+    {t:"Small monthly subscriptions can quietly add up to a real leak in your budget.",a:true,e:"Five dollars here and there compounds. The little stuff is where the money hides."},
+    {t:"Checking your bank balance often makes you worse with money.",a:false,e:"Awareness is step one. Avoiding the number is the actual enemy, not facing it."},
+    {t:"Saying no at work will always get you fired.",a:false,e:"Boundaries set clearly and calmly tend to build respect, not pink slips."},
+    {t:"You need a big salary before budgeting is even worth doing.",a:false,e:"Myth. Habits matter more than income size. Small earners who budget often outpace big earners who do not."}
+  ];
+  var i=0,score=0,answered=false;
+  var elState=document.getElementById("statement"),elQ=document.getElementById("qcount"),elScore=document.getElementById("score"),elBar=document.getElementById("bar"),elFb=document.getElementById("feedback"),bMyth=document.getElementById("bMyth"),bTruth=document.getElementById("bTruth"),bNext=document.getElementById("nextBtn"),bRestart=document.getElementById("restartBtn"),playArea=document.getElementById("play-area"),endBox=document.getElementById("end"),endTitle=document.getElementById("endTitle"),endMsg=document.getElementById("endMsg");
+  if(!elState)return;
+  function load(){answered=false;var q=Q[i];elState.textContent=q.t;elQ.textContent="Question "+(i+1)+" of "+Q.length;elBar.style.width=((i)/Q.length*100)+"%";elFb.textContent="";bNext.style.display="none";[bMyth,bTruth].forEach(function(b){b.disabled=false;b.className="";});}
+  function answer(choice){if(answered)return;answered=true;var q=Q[i];var correct=(choice===q.a);if(correct)score++;elScore.textContent=score;bMyth.disabled=true;bTruth.disabled=true;var picked=choice?bTruth:bMyth;var rightBtn=q.a?bTruth:bMyth;rightBtn.className="right";if(!correct)picked.className="wrong";elBar.style.width=((i+1)/Q.length*100)+"%";elFb.innerHTML="<b>"+(correct?"Spot on.":"Not quite.")+"</b> "+q.e;bNext.textContent=(i===Q.length-1)?"See result":"Next";bNext.style.display="inline-block";}
+  function next(){if(i<Q.length-1){i++;load();}else{finish();}}
+  function finish(){playArea.style.display="none";endBox.style.display="block";var msg;if(score===Q.length)msg="Flawless. Your instincts are sorted.";else if(score>=6)msg="Strong. You see through most of the noise.";else if(score>=4)msg="Decent start. A few myths still got you.";else msg="Plenty to unlearn, and that is the whole point.";endTitle.textContent="You scored "+score+" / "+Q.length;endMsg.textContent=msg;}
+  function restart(){i=0;score=0;answered=false;elScore.textContent=0;endBox.style.display="none";playArea.style.display="block";load();}
+  bMyth.addEventListener("click",function(){answer(false);});
+  bTruth.addEventListener("click",function(){answer(true);});
+  bNext.addEventListener("click",next);
+  bRestart.addEventListener("click",restart);
+  load();
+})();
+</script>
+</body>
+</html>
